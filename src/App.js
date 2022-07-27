@@ -1,5 +1,19 @@
 import React from "react";
+import "./styles/app.css";
+import "./styles/reset.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Join from "./pages/Join/Join";
 
 export default function App() {
-  return <div>App</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/join" element={<Join />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
