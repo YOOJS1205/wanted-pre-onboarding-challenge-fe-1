@@ -3,12 +3,11 @@ import axios from "axios";
 import Container from "../../components/Container/Container";
 import Button from "../Button/Button";
 import UserInfoInput from "./UserInfoInput";
+import ToJoin from "../../pages/Login/ToJoin";
 
 export default function LoginForm() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-
-  console.log(id, password);
 
   function onHandleId(e) {
     setId(e.target.value);
@@ -20,13 +19,14 @@ export default function LoginForm() {
 
   async function onClickLoginButton() {
     try {
-      const res = axios.post("http://localhost:8080/users/login", {
-        body: {
-          email: id,
-          password: password,
-        },
+      const res = await axios.post("http://localhost:8080/users/login", {
+        email: id,
+        password: password,
       });
       console.log(res);
+      if (res.data.message === "성공적으로 로그인 했습니다") {
+        localStorage.setItem("token", res.data.token);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +36,7 @@ export default function LoginForm() {
       <UserInfoInput labelText="아이디" onChange={onHandleId} />
       <UserInfoInput labelText="비밀번호" onChange={onHandlePassword} />
       <Button buttonText="로그인" onClick={onClickLoginButton} />
+      <ToJoin />
     </Container>
   );
 }
