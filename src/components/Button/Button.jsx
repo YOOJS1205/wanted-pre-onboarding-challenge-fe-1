@@ -1,8 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Button({ buttonText, onClick }) {
-  return <Btn onClick={onClick}>{buttonText}</Btn>;
+export default function Button({ buttonText, onClick, isActive }) {
+  console.log(isActive);
+  return (
+    <Btn
+      onClick={onClick}
+      disabled={!isActive && "disabled"}
+      isActive={isActive}
+    >
+      {buttonText}
+    </Btn>
+  );
 }
 
 const Btn = styled.button`
@@ -10,7 +19,8 @@ const Btn = styled.button`
   border-radius: 10px;
   color: #fff;
   padding: 15px;
-  background-color: #000;
+  background-color: ${(props) =>
+    props.isActive ? "#000" : "rgba(0, 0, 0, 0.3)"};
   width: 100%;
   font-weight: 600;
 `;
