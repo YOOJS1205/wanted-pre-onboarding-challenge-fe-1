@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Container from "../../components/Container/Container";
 
 export default function Home() {
   return (
@@ -15,17 +16,6 @@ export default function Home() {
     </Container>
   );
 }
-
-const Container = styled.article`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 30px;
-  border: 2px solid #bdbdbd;
-  border-radius: 20px;
-  background-color: #fff;
-`;
 
 const Title = styled.h1`
   font-weight: 600;
