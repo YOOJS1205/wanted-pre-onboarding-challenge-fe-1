@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { checkAvailable } from "../../util/check";
+import { checkActive } from "../../util/check";
 import Container from "../../components/Container/Container";
 import Button from "../Button/Button";
 import UserInfoInput from "./UserInfoInput";
@@ -7,6 +10,8 @@ import WarningText from "./WarningText";
 import ToJoin from "../../pages/Login/ToJoin";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isId, setIsId] = useState(true);
@@ -22,37 +27,13 @@ export default function LoginForm() {
     setPassword(e.target.value);
   }
 
-  function checkAvailable(id, pw) {
-    const regExp =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (!regExp.test(id)) {
-      setIsId(false);
-    } else {
-      setIsId(true);
-    }
-
-    if (pw.length < 8) {
-      setIsPassword(false);
-    } else {
-      setIsPassword(true);
-    }
-  }
-
-  function checkActive() {
-    if (id && password && isId && isPassword) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
   useEffect(() => {
-    checkAvailable(id, password);
+    checkAvailable(id, password, setIsId, setIsPassword);
   }, [id, password]);
 
   useEffect(() => {
-    checkActive();
-  }, [isId, isPassword]);
+    checkActive(id, password, isId, isPassword, setIsActive);
+  }, [id, password, isId, isPassword]);
 
   async function onClickLoginButton() {
     try {
@@ -60,9 +41,10 @@ export default function LoginForm() {
         email: id,
         password: password,
       });
-      console.log(res);
+
       if (res.data.message === "성공적으로 로그인 했습니다") {
         localStorage.setItem("token", res.data.token);
+        navigate("/todo");
       }
     } catch (error) {
       console.log(error);

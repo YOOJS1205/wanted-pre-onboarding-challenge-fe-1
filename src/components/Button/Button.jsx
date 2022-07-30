@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Button({ buttonText, onClick, isActive }) {
-  console.log(isActive);
   return (
     <Btn
       onClick={onClick}
