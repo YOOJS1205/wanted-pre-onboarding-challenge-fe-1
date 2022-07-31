@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Button({ buttonText, onClick, isActive }) {
+export default function Button({ buttonText, onClick, isActive, size }) {
   return (
     <Btn
       onClick={onClick}
       disabled={!isActive && "disabled"}
       isActive={isActive}
+      size={size}
     >
       {buttonText}
     </Btn>
@@ -20,6 +21,6 @@ const Btn = styled.button`
   padding: 15px;
   background-color: ${(props) =>
     props.isActive ? "#000" : "rgba(0, 0, 0, 0.3)"};
-  width: 100%;
+  width: ${(props) => (props.size === "small" ? "100px" : "100%")};
   font-weight: 600;
 `;

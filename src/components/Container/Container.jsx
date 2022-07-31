@@ -16,6 +16,6 @@ const Box = styled.section`
   background-color: #fff;
   display: ${(props) => props.isFlex && "flex"};
   gap: ${(props) => props.isFlex && "40px"};
-  width: ${(props) => props.isFlex && "80%"};
-  height: ${(props) => props.isFlex && "80%"};
+  width: ${(props) => props.isFlex && "70%"};
+  height: ${(props) => props.isFlex && "70%"};
 `;

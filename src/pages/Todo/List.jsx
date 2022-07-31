@@ -39,8 +39,14 @@ export default function List({ getPost }) {
   return (
     <Container onClick={getPostData}>
       <p className="ir">할일 목록입니다.</p>
-      {/* {postList && postList.map((item) => <Item key={item.createdAt} />)} */}
-      <Item>
+      {postList &&
+        postList.map((item) => (
+          <Item key={item.createdAt}>
+            <Title>{item.title}</Title>
+            <Content>{item.content}</Content>
+          </Item>
+        ))}
+      {/* <Item>
         <Title>빨래하기1</Title>
         <Content>빨래1을 합시다.</Content>
       </Item>
@@ -55,13 +61,22 @@ export default function List({ getPost }) {
       <Item>
         <Title>빨래하기4</Title>
         <Content>빨래4를 합시다.</Content>
-      </Item>
+      </Item> */}
     </Container>
   );
 }
 
 const Container = styled.section`
   width: 30%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #c4c4c4;
+    border-right: 4px solid transparent;
+  }
 `;
 
 const Item = styled.article`
@@ -70,6 +85,8 @@ const Item = styled.article`
   border-radius: 10px;
   padding: 10px;
   word-break: keep-all;
+  margin-right: 20px;
+  cursor: pointer;
 `;
 
 const Title = styled.h2``;
