@@ -21,6 +21,11 @@ const Btn = styled.button`
   padding: 15px;
   background-color: ${(props) =>
     props.isActive ? "#000" : "rgba(0, 0, 0, 0.3)"};
-  width: ${(props) => (props.size === "small" ? "100px" : "100%")};
+  width: ${(props) =>
+    props.size === "small"
+      ? "100px"
+      : props.size === "extra-small"
+      ? "70px"
+      : "100%"};
   font-weight: 600;
 `;

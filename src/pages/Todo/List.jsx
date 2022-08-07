@@ -25,7 +25,7 @@ export default function List({ getPost }) {
 
   useEffect(() => {
     getPost(postData);
-  }, [postData]);
+  }, [getPost, postData]);
 
   function getPostData(e) {
     if (e.target.parentNode.nodeName === "ARTICLE") {
@@ -46,22 +46,6 @@ export default function List({ getPost }) {
             <Content>{item.content}</Content>
           </Item>
         ))}
-      {/* <Item>
-        <Title>빨래하기1</Title>
-        <Content>빨래1을 합시다.</Content>
-      </Item>
-      <Item>
-        <Title>빨래하기2</Title>
-        <Content>빨래2를 합시다.</Content>
-      </Item>
-      <Item>
-        <Title>빨래하기3</Title>
-        <Content>빨래3을 합시다.</Content>
-      </Item>
-      <Item>
-        <Title>빨래하기4</Title>
-        <Content>빨래4를 합시다.</Content>
-      </Item> */}
     </Container>
   );
 }
