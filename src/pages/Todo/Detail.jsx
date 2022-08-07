@@ -3,17 +3,21 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../../components/Button/Button";
 
-export default function Detail({ postData, postKey }) {
+export default function Detail({ postData, postKey, getList }) {
   const onClickDeleteButton = useCallback(async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.delete(`http://localhost:8080/todos/${postKey}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res);
-  }, [postKey]);
-  console.log(postKey);
+    try {
+      const res = await axios.delete(`http://localhost:8080/todos/${postKey}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getList();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [postKey, getList]);
+
   return (
     <Container>
       <Title>{postData.title}</Title>
