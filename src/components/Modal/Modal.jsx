@@ -17,16 +17,21 @@ export default function Modal({ modalOpen, onClick }) {
 
   const onClickAddButton = useCallback(async () => {
     const token = localStorage.getItem("token");
-    const res = axios.post("http://localhost:8080/todos", {
-      body: {
-        title: title,
-        content: text,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res);
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/todos",
+        {
+          title: title,
+          content: text,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+    } catch (error) {}
   }, [title, text]);
 
   return (
@@ -67,6 +72,11 @@ const Inside = styled.section`
   border: 2px solid #bdbdbd;
   overflow: hidden;
   text-align: right;
+  button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
 `;
 
 const Title = styled.input`

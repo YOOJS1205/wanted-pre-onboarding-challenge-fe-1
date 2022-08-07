@@ -1,47 +1,33 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 
-export default function List({ getPost }) {
-  const [postList, setPostList] = useState([]);
+export default function List({ getPost, postList, getPostKey }) {
   const [postData, setPostData] = useState({ title: "", content: "" });
+  const [postKey, setPostKey] = useState("");
 
   useEffect(() => {
-    (async function getList() {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8080/todos", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log(res);
-        setPostList(res.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+    getPostKey(postKey);
+  }, [postKey, getPostKey]);
 
   useEffect(() => {
     getPost(postData);
   }, [getPost, postData]);
 
-  function getPostData(e) {
+  const getPostData = useCallback((e) => {
     if (e.target.parentNode.nodeName === "ARTICLE") {
       setPostData({
         title: e.target.parentNode.childNodes[0].innerText,
         content: e.target.parentNode.childNodes[1].innerText,
       });
     }
-  }
+  }, []);
 
   return (
     <Container onClick={getPostData}>
       <p className="ir">할일 목록입니다.</p>
       {postList &&
         postList.map((item) => (
-          <Item key={item.createdAt}>
+          <Item key={item.id} onClick={() => setPostKey(item.id)}>
             <Title>{item.title}</Title>
             <Content>{item.content}</Content>
           </Item>
