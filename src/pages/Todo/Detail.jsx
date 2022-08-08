@@ -3,11 +3,11 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../../components/Button/Button";
 
-export default function Detail({ postData, postKey, getList }) {
+export default function Detail({ postData, postKey, getList, postList }) {
   const onClickDeleteButton = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.delete(`http://localhost:8080/todos/${postKey}`, {
+      await axios.delete(`http://localhost:8080/todos/${postKey}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -20,8 +20,8 @@ export default function Detail({ postData, postKey, getList }) {
 
   return (
     <Container>
-      <Title>{postData.title}</Title>
-      <Content>{postData.content}</Content>
+      <Title>{postList.length ? postData.title : null}</Title>
+      <Content>{postList.length ? postData.content : null}</Content>
       <Button
         buttonText="삭제"
         isActive={true}

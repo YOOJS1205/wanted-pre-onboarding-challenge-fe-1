@@ -22,7 +22,6 @@ export default function Todo() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
       setPostList(res.data.data);
     } catch (error) {
       console.log(error);
@@ -67,9 +66,19 @@ export default function Todo() {
       </FuncBox>
       <Container isFlex={true}>
         <List getPost={getPost} postList={postList} getPostKey={getPostKey} />
-        <Detail postData={postData} postKey={postKey} getList={getList} />
+        <Detail
+          postData={postData}
+          postKey={postKey}
+          getList={getList}
+          postList={postList}
+        />
       </Container>
-      <Modal modalOpen={modalOpen} onClick={closeModal} getList={getList} />
+      <Modal
+        modalOpen={modalOpen}
+        onClick={closeModal}
+        getList={getList}
+        setModalOpen={setModalOpen}
+      />
     </>
   );
 }
