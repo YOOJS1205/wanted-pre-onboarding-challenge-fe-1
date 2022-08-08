@@ -44,11 +44,19 @@
 ## 6. UI
 
 - 초기 페이지
+  <div>
   <img width="633" alt="image" src="https://user-images.githubusercontent.com/89122773/183481152-abd2c37d-9ce4-4e02-a03f-6fc6718c1c6d.png">
+  </div>
+
 - 로그인, 회원가입 페이지
+  <div>
   <img width="633" alt="image" src="https://user-images.githubusercontent.com/89122773/183481413-0bd22dc9-f726-4493-bf95-38cd99f642ca.png">
+  </div>
+
 - 투두리스트 페이지
+  <div>
   <img width="635" alt="image" src="https://user-images.githubusercontent.com/89122773/183481576-d5670729-09ab-4021-a46b-665e7e5c1783.png">
+  </div>
 
 ## 7. 구현 기능
 
