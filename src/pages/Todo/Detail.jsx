@@ -22,12 +22,15 @@ export default function Detail({ postData, postKey, getList, postList }) {
     <Container>
       <Title>{postList.length ? postData.title : null}</Title>
       <Content>{postList.length ? postData.content : null}</Content>
-      <Button
-        buttonText="삭제"
-        isActive={true}
-        size="extra-small"
-        onClick={onClickDeleteButton}
-      />
+      <ButtonContainer>
+        <Button buttonText="수정" isActive={true} size="extra-small" />
+        <Button
+          buttonText="삭제"
+          isActive={true}
+          size="extra-small"
+          onClick={onClickDeleteButton}
+        />
+      </ButtonContainer>
     </Container>
   );
 }
@@ -37,10 +40,16 @@ const Container = styled.section`
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   position: relative;
-  button {
+  article {
     position: absolute;
     bottom: 20px;
     right: 20px;
+  }
+`;
+
+const ButtonContainer = styled.article`
+  button {
+    margin: 0 10px;
   }
 `;
 

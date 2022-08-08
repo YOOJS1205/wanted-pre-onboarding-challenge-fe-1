@@ -4,7 +4,6 @@ import styled from "styled-components";
 export default function List({ getPost, postList, getPostKey }) {
   const [postData, setPostData] = useState({ title: "", content: "" });
   const [postKey, setPostKey] = useState("");
-  const [isFocus, setIsFocus] = useState(false);
 
   useEffect(() => {
     getPostKey(postKey);
@@ -23,26 +22,12 @@ export default function List({ getPost, postList, getPostKey }) {
     }
   }, []);
 
-  const onFocusList = useCallback(() => {
-    setIsFocus(true);
-  }, []);
-
-  const onBlurList = useCallback(() => {
-    setIsFocus(false);
-  }, []);
-
   return (
     <Container onClick={getPostData}>
       <p className="ir">할일 목록입니다.</p>
       {postList &&
         postList.map((item) => (
-          <Item
-            key={item.id}
-            onClick={() => setPostKey(item.id)}
-            onFocus={onFocusList}
-            onBlur={onBlurList}
-            isFocus={isFocus}
-          >
+          <Item key={item.id} onClick={() => setPostKey(item.id)}>
             <Title>{item.title}</Title>
             <Content>{item.content}</Content>
           </Item>

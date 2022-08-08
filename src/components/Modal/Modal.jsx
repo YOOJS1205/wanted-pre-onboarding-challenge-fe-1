@@ -18,7 +18,7 @@ export default function Modal({ modalOpen, onClick, getList, setModalOpen }) {
   const onClickAddButton = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:8080/todos",
         {
           title: title,
