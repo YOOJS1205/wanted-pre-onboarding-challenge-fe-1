@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
+import useGetList from "../../hooks/useGetList";
 import styled from "styled-components";
 
-export default function List({ getPost, postList, getPostKey }) {
+export default function List({ getPost, getPostKey }) {
   const [postData, setPostData] = useState({ title: "", content: "" });
   const [postKey, setPostKey] = useState("");
+
+  const postList = useGetList();
 
   useEffect(() => {
     getPostKey(postKey);

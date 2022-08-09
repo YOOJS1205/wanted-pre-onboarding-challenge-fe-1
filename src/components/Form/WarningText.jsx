@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-export default function WarningText({ text }) {
+export default memo(function WarningText({ text }) {
   return <Text>{text}</Text>;
-}
+});
 
 const Text = styled.p`
   color: red;

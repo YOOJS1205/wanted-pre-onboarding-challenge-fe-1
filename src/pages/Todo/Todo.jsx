@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import useGetList from "../../hooks/useGetList";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import Detail from "./Detail";
@@ -11,19 +10,15 @@ export default function Todo() {
   const [postData, setPostData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [postKey, setPostKey] = useState("");
-  // 투두리스트 불러오는 커스텀 훅
-  const postList = useGetList();
-  console.log(postList);
-
   // 자식 요소로부터 게시물 정보 받아오기
   const getPost = useCallback((data) => {
     setPostData(data);
   }, []);
 
   // 할 일 추가
-  const onClickAddButton = useCallback(() => {
+  const onClickAddButton = () => {
     setModalOpen(true);
-  }, []);
+  };
 
   // 모달창 닫기
   const closeModal = useCallback((e) => {
@@ -48,7 +43,7 @@ export default function Todo() {
         />
       </FuncBox>
       <Container isFlex={true}>
-        <List getPost={getPost} postList={postList} getPostKey={getPostKey} />
+        <List getPost={getPost} getPostKey={getPostKey} />
         <Detail postData={postData} postKey={postKey} />
       </Container>
       <Modal

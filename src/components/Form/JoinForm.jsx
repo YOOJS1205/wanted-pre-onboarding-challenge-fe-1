@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { checkAvailable } from "../../util/check";
@@ -17,13 +17,13 @@ export default function JoinForm() {
   const [isPassword, setIsPassword] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
-  function onHandleId(e) {
+  const onHandleId = useCallback((e) => {
     setId(e.target.value);
-  }
+  }, []);
 
-  function onHandlePassword(e) {
+  const onHandlePassword = useCallback((e) => {
     setPassword(e.target.value);
-  }
+  }, []);
 
   useEffect(() => {
     checkAvailable(id, password, setIsId, setIsPassword);

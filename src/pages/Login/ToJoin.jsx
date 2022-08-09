@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function ToJoin() {
+export default memo(function ToJoin() {
   return <Func to="/auth/join">회원가입하기</Func>;
-}
+});
 
 const Func = styled(Link)`
   color: #bdbdbd;

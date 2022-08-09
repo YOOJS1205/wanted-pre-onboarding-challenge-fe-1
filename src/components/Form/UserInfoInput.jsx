@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-export default function UserInfoInput({ labelText, onChange }) {
+export default memo(function UserInfoInput({ labelText, onChange }) {
   return (
     <Container>
       <p className="ir">유저 정보 Input</p>
@@ -9,7 +9,7 @@ export default function UserInfoInput({ labelText, onChange }) {
       <Input onChange={onChange} />
     </Container>
   );
-}
+});
 
 const Container = styled.article``;
 
