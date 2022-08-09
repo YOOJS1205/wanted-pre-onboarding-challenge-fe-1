@@ -35,7 +35,7 @@ export default function JoinForm() {
 
   async function onClickJoinButton() {
     try {
-      const res = await axios.post("http://localhost:8080/users/create", {
+      await axios.post("http://localhost:8080/users/create", {
         email: id,
         password: password,
       });

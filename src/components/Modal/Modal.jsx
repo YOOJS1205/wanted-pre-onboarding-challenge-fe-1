@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../Button/Button";
 
-export default function Modal({ modalOpen, onClick, getList, setModalOpen }) {
+export default function Modal({ modalOpen, onClick, setModalOpen }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
@@ -30,10 +30,9 @@ export default function Modal({ modalOpen, onClick, getList, setModalOpen }) {
           },
         }
       );
-      getList();
       setModalOpen(false);
     } catch (error) {}
-  }, [title, text, getList, setModalOpen]);
+  }, [title, text, setModalOpen]);
 
   return (
     <Container modalOpen={modalOpen} onClick={onClick}>

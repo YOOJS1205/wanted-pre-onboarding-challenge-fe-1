@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../../components/Button/Button";
 
-export default function Detail({ postData, postKey, getList, postList }) {
+export default function Detail({ postData, postKey }) {
   const onClickDeleteButton = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
@@ -12,16 +12,15 @@ export default function Detail({ postData, postKey, getList, postList }) {
           Authorization: `Bearer ${token}`,
         },
       });
-      getList();
     } catch (error) {
       console.log(error);
     }
-  }, [postKey, getList]);
+  }, [postKey]);
 
   return (
     <Container>
-      <Title>{postList.length ? postData.title : null}</Title>
-      <Content>{postList.length ? postData.content : null}</Content>
+      <Title>{postData.title}</Title>
+      <Content>{postData.content}</Content>
       <ButtonContainer>
         <Button buttonText="수정" isActive={true} size="extra-small" />
         <Button

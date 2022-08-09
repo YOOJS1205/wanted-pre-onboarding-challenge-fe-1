@@ -11,7 +11,7 @@ export default function List({ getPost, postList, getPostKey }) {
 
   useEffect(() => {
     getPost(postData);
-  }, [getPost, postData]);
+  }, [postData, getPost]);
 
   const getPostData = useCallback((e) => {
     if (e.target.parentNode.nodeName === "ARTICLE") {

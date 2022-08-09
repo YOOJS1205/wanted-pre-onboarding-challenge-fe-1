@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
+import useGetList from "../../hooks/useGetList";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import Detail from "./Detail";
@@ -8,29 +8,12 @@ import List from "./List";
 import Modal from "../../components/Modal/Modal";
 
 export default function Todo() {
-  const [postList, setPostList] = useState([]);
   const [postData, setPostData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [postKey, setPostKey] = useState("");
-
-  // 질문: 데이터 불러오기 함수 선언, 자식 요소에도 전달
-  async function getList() {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8080/todos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setPostList(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getList();
-  }, []);
+  // 투두리스트 불러오는 커스텀 훅
+  const postList = useGetList();
+  console.log(postList);
 
   // 자식 요소로부터 게시물 정보 받아오기
   const getPost = useCallback((data) => {
@@ -66,17 +49,11 @@ export default function Todo() {
       </FuncBox>
       <Container isFlex={true}>
         <List getPost={getPost} postList={postList} getPostKey={getPostKey} />
-        <Detail
-          postData={postData}
-          postKey={postKey}
-          getList={getList}
-          postList={postList}
-        />
+        <Detail postData={postData} postKey={postKey} />
       </Container>
       <Modal
         modalOpen={modalOpen}
         onClick={closeModal}
-        getList={getList}
         setModalOpen={setModalOpen}
       />
     </>
