@@ -6,13 +6,18 @@ import Detail from "./Detail";
 import List from "./List";
 import Modal from "../../components/Modal/Modal";
 
+export interface IPostData {
+  title: string;
+  content: string;
+}
+
 export default function Todo() {
-  const [postData, setPostData] = useState({});
+  const [postData, setPostData] = useState({ title: "", content: "" });
   const [modalOpen, setModalOpen] = useState(false);
   const [postKey, setPostKey] = useState("");
 
   // 자식 요소로부터 게시물 정보 받아오기
-  const getPost = useCallback((data) => {
+  const getPost = useCallback((data: IPostData) => {
     setPostData(data);
   }, []);
 
@@ -22,14 +27,14 @@ export default function Todo() {
   }, []);
 
   // 모달창 닫기
-  const closeModal = useCallback((e) => {
+  const closeModal = useCallback((e: any) => {
     if (e.target.nodeName === "ARTICLE") {
       setModalOpen(false);
     }
   }, []);
 
   // 자식 요소로부터 게시물 id 받아오기
-  const getPostKey = useCallback((key) => {
+  const getPostKey = useCallback((key: string) => {
     setPostKey(key);
   }, []);
 

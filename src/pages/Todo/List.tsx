@@ -2,7 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import useGetList from "../../hooks/useGetList";
 import styled from "styled-components";
 
-export default function List({ getPost, getPostKey }) {
+interface IProps {
+  getPost: (data: object) => void;
+  getPostKey: (key: string) => void;
+}
+
+export default function List({ getPost, getPostKey }: IProps) {
   const [postData, setPostData] = useState({ title: "", content: "" });
   const [postKey, setPostKey] = useState("");
 
@@ -16,7 +21,7 @@ export default function List({ getPost, getPostKey }) {
     getPost(postData);
   }, [postData, getPost]);
 
-  const getPostData = useCallback((e) => {
+  const getPostData = useCallback((e: any) => {
     if (e.target.parentNode.nodeName === "ARTICLE") {
       setPostData({
         title: e.target.parentNode.childNodes[0].innerText,
@@ -60,7 +65,6 @@ const Item = styled.article`
   word-break: keep-all;
   margin-right: 20px;
   cursor: pointer;
-  border-color: ${(props) => (props.isFocus ? "black" : "rgba(0, 0, 0, 0.3)")};
 `;
 
 const Title = styled.h2``;

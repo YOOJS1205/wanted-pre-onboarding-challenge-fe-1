@@ -3,15 +3,25 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "../Button/Button";
 
-export default function Modal({ modalOpen, onClick, setModalOpen }) {
+interface IProps {
+  modalOpen: boolean;
+  onClick: (e: any) => void;
+  setModalOpen: (modalOpen: boolean) => void;
+}
+
+interface IContainer {
+  modalOpen: boolean;
+}
+
+export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
-  const onHandleTitle = useCallback((e) => {
+  const onHandleTitle = useCallback((e: any) => {
     setTitle(e.target.value);
   }, []);
 
-  const onHandleText = useCallback((e) => {
+  const onHandleText = useCallback((e: any) => {
     setText(e.target.value);
   }, []);
 
@@ -50,7 +60,7 @@ export default function Modal({ modalOpen, onClick, setModalOpen }) {
   );
 }
 
-const Container = styled.article`
+const Container = styled.article<IContainer>`
   position: absolute;
   top: 0;
   left: 0;

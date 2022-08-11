@@ -1,9 +1,15 @@
 import React, { useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { IPostData } from "./Todo";
 import Button from "../../components/Button/Button";
 
-export default function Detail({ postData, postKey }) {
+interface IProps {
+  postData: IPostData;
+  postKey: string;
+}
+
+export default function Detail({ postData, postKey }: IProps) {
   const onClickDeleteButton = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
@@ -22,7 +28,12 @@ export default function Detail({ postData, postKey }) {
       <Title>{postData.title}</Title>
       <Content>{postData.content}</Content>
       <ButtonContainer>
-        <Button buttonText="수정" isActive={true} size="extra-small" />
+        <Button
+          buttonText="수정"
+          isActive={true}
+          size="extra-small"
+          onClick={null}
+        />
         <Button
           buttonText="삭제"
           isActive={true}

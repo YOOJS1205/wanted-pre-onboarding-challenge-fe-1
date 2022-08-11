@@ -1,7 +1,25 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-export default memo(function Button({ buttonText, onClick, isActive, size }) {
+interface IProps {
+  buttonText: string;
+  onClick: any;
+  isActive: boolean;
+  size: string;
+}
+
+interface IInnerScreen {
+  isActive: boolean;
+  size: string;
+  disabled: any;
+}
+
+export default memo(function Button({
+  buttonText,
+  onClick,
+  isActive,
+  size,
+}: IProps) {
   return (
     <Btn
       onClick={onClick}
@@ -14,7 +32,7 @@ export default memo(function Button({ buttonText, onClick, isActive, size }) {
   );
 });
 
-const Btn = styled.button`
+const Btn = styled.button<IInnerScreen>`
   border: none;
   border-radius: 10px;
   color: #fff;

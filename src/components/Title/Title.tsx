@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Title({ titleText }) {
+interface IProps {
+  titleText: string;
+}
+
+export default function Title({ titleText }: IProps) {
   return <H1>{titleText}</H1>;
 }
 
