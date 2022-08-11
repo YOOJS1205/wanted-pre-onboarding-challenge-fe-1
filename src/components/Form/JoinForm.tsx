@@ -17,13 +17,16 @@ export default function JoinForm() {
   const [isPassword, setIsPassword] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
-  const onHandleId = useCallback((e) => {
+  const onHandleId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   }, []);
 
-  const onHandlePassword = useCallback((e) => {
-    setPassword(e.target.value);
-  }, []);
+  const onHandlePassword = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    },
+    []
+  );
 
   useEffect(() => {
     checkAvailable(id, password, setIsId, setIsPassword);
@@ -47,7 +50,7 @@ export default function JoinForm() {
   }, [id, password, navigate]);
 
   return (
-    <Container>
+    <Container isFlex={false}>
       <UserInfoInput labelText="아이디" onChange={onHandleId} />
       {!isId && id && <WarningText text="* 올바른 이메일 형식이 아닙니다." />}
       <UserInfoInput labelText="비밀번호" onChange={onHandlePassword} />
@@ -58,6 +61,7 @@ export default function JoinForm() {
         buttonText="회원가입"
         onClick={onClickJoinButton}
         isActive={isActive}
+        size={null}
       />
     </Container>
   );

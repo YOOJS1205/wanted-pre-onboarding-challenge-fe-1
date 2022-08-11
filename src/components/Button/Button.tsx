@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface IProps {
   buttonText: string;
   onClick: any;
-  isActive: boolean;
+  isActive: any;
   size: string;
 }
 

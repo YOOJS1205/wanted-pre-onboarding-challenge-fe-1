@@ -1,7 +1,11 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-export default memo(function WarningText({ text }) {
+interface IProps {
+  text: string;
+}
+
+export default memo(function WarningText({ text }: IProps) {
   return <Text>{text}</Text>;
 });
 

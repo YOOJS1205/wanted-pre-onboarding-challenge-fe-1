@@ -1,6 +1,6 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-module.exports = (app) => {
+module.exports = (app: any) => {
   app.use(
     "/users",
     createProxyMiddleware({

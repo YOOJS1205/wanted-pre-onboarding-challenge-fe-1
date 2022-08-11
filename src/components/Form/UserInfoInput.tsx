@@ -1,7 +1,12 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-export default memo(function UserInfoInput({ labelText, onChange }) {
+interface IProps {
+  labelText: string;
+  onChange: (e: any) => void;
+}
+
+export default memo(function UserInfoInput({ labelText, onChange }: IProps) {
   return (
     <Container>
       <p className="ir">유저 정보 Input</p>
