@@ -33,7 +33,7 @@ export default function JoinForm() {
     checkActive(id, password, isId, isPassword, setIsActive);
   }, [isId, isPassword, id, password]);
 
-  async function onClickJoinButton() {
+  const onClickJoinButton = useCallback(async () => {
     try {
       await axios.post("http://localhost:8080/users/create", {
         email: id,
@@ -44,7 +44,7 @@ export default function JoinForm() {
     } catch (error) {
       console.log(error);
     }
-  }
+  }, [id, password, navigate]);
 
   return (
     <Container>

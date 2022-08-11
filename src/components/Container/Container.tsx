@@ -1,11 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Container({ children, isFlex }) {
+interface Iprops {
+  children: any;
+  isFlex: boolean;
+}
+
+interface IInnerScreen {
+  isFlex: boolean;
+}
+
+export default function Container({ children, isFlex }: Iprops) {
   return <Box isFlex={isFlex}>{children}</Box>;
 }
 
-const Box = styled.section`
+const Box = styled.section<IInnerScreen>`
   position: absolute;
   top: 50%;
   left: 50%;

@@ -5,7 +5,7 @@ import Container from "../../components/Container/Container";
 
 export default function Home() {
   return (
-    <Container>
+    <Container isFlex={false}>
       <p className="ir">렌더링 후 첫 페이지입니다.</p>
       <Title>나만의 ToDoList를 만들어보세요.</Title>
       <FuncContainer>

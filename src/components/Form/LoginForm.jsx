@@ -35,7 +35,7 @@ export default function LoginForm() {
     checkActive(id, password, isId, isPassword, setIsActive);
   }, [id, password, isId, isPassword]);
 
-  async function onClickLoginButton() {
+  const onClickLoginButton = useCallback(async () => {
     try {
       const res = await axios.post("http://localhost:8080/users/login", {
         email: id,
@@ -54,7 +54,8 @@ export default function LoginForm() {
         setIsWrong(false);
       }
     }
-  }
+  }, [id, password, navigate]);
+
   return (
     <Container>
       <UserInfoInput labelText="아이디" onChange={onHandleId} />

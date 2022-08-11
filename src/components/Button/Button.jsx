@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-export default function Button({ buttonText, onClick, isActive, size }) {
+export default memo(function Button({ buttonText, onClick, isActive, size }) {
   return (
     <Btn
       onClick={onClick}
@@ -12,7 +12,7 @@ export default function Button({ buttonText, onClick, isActive, size }) {
       {buttonText}
     </Btn>
   );
-}
+});
 
 const Btn = styled.button`
   border: none;

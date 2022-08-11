@@ -10,15 +10,16 @@ export default function Todo() {
   const [postData, setPostData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [postKey, setPostKey] = useState("");
+
   // 자식 요소로부터 게시물 정보 받아오기
   const getPost = useCallback((data) => {
     setPostData(data);
   }, []);
 
   // 할 일 추가
-  const onClickAddButton = () => {
+  const onClickAddButton = useCallback(() => {
     setModalOpen(true);
-  };
+  }, []);
 
   // 모달창 닫기
   const closeModal = useCallback((e) => {
