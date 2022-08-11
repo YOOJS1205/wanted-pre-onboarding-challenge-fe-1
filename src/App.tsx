@@ -1,6 +1,5 @@
 import React from "react";
-import "./styles/app.css";
-import "./styles/reset.css";
+import { GlobalStyles } from "./styles/globalStyle";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -9,13 +8,16 @@ import Todo from "./pages/Todo/Todo";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/join" element={<Join />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/join" element={<Join />} />
+          <Route path="/todo" element={<Todo />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
