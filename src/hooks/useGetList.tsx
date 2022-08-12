@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useGetList() {
   const [list, setList] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const getList = useCallback(async () => {
     try {
@@ -13,6 +14,7 @@ export default function useGetList() {
         },
       });
       setList(res.data.data);
+      res.status === 200 ? setIsSuccess(true) : setIsSuccess(false);
     } catch (error) {
       console.log(error);
     }
@@ -20,7 +22,7 @@ export default function useGetList() {
 
   useEffect(() => {
     getList();
-  }, [getList]);
+  }, [isSuccess]);
 
   return list;
 }

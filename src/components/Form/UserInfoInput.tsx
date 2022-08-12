@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface IProps {
   labelText: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default memo(function UserInfoInput({ labelText, onChange }: IProps) {
