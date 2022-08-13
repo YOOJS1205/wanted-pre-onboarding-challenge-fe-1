@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { customToDoAxios } from "../../util/customToDoAxios";
+import { customToDoAxios } from "../../api/customToDoAxios";
 import { IPostData } from "./Todo";
 import Button from "../../components/Button/Button";
 
@@ -12,7 +12,7 @@ interface IProps {
 export default function Detail({ postData, postKey }: IProps) {
   const onClickDeleteButton = useCallback(async () => {
     try {
-      await customToDoAxios.delete(`/todos/${postKey}`);
+      await customToDoAxios.delete(`/${postKey}`);
     } catch (error) {
       console.log(error);
     }

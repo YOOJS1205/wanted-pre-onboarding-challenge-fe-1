@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import axios from "axios";
+import { customToDoAxios } from "../../api/customToDoAxios";
 import styled from "styled-components";
 import Button from "../Button/Button";
 
@@ -26,20 +26,11 @@ export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
   }, []);
 
   const onClickAddButton = useCallback(async () => {
-    const token = localStorage.getItem("token");
     try {
-      await axios.post(
-        "http://localhost:8080/todos",
-        {
-          title: title,
-          content: text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await customToDoAxios.post("/", {
+        title: title,
+        content: text,
+      });
       setModalOpen(false);
     } catch (error) {}
   }, [title, text, setModalOpen]);

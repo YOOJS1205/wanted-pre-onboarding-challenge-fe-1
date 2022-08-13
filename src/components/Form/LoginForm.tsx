@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { customAuthAxios } from "../../api/customAuthAxios";
 import { checkAvailable } from "../../util/check";
 import { checkActive } from "../../util/check";
 import Container from "../Container/Container";
@@ -40,7 +40,7 @@ export default function LoginForm() {
 
   const onClickLoginButton = useCallback(async () => {
     try {
-      const res = await axios.post("http://localhost:8080/users/login", {
+      const res = await customAuthAxios.post("/login", {
         email: id,
         password: password,
       });

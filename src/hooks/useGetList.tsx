@@ -1,20 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import { customToDoAxios } from "../api/customToDoAxios";
 
 export default function useGetList() {
   const [list, setList] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const getList = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8080/todos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await customToDoAxios.get("/");
       setList(res.data.data);
-      res.status === 200 ? setIsSuccess(true) : setIsSuccess(false);
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +15,7 @@ export default function useGetList() {
 
   useEffect(() => {
     getList();
-  }, [isSuccess]);
+  }, []);
 
   return list;
 }

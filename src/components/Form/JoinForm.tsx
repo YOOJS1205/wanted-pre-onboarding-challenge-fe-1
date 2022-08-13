@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { customAuthAxios } from "../../api/customAuthAxios";
 import { checkAvailable } from "../../util/check";
 import { checkActive } from "../../util/check";
 import Button from "../Button/Button";
@@ -38,7 +38,7 @@ export default function JoinForm() {
 
   const onClickJoinButton = useCallback(async () => {
     try {
-      await axios.post("http://localhost:8080/users/create", {
+      await customAuthAxios.post("/create", {
         email: id,
         password: password,
       });
