@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { customAuthAxios } from "../../api/customAuthAxios";
 import { checkAvailable } from "../../util/check";
 import { checkActive } from "../../util/check";
+import useInput from "../../hooks/useInput";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
 import UserInfoInput from "./UserInfoInput";
@@ -12,23 +13,12 @@ import ToJoin from "../../pages/Login/ToJoin";
 export default function LoginForm() {
   const navigate = useNavigate();
 
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, onHandleId] = useInput("");
+  const [password, onHandlePassword] = useInput("");
   const [isId, setIsId] = useState(true);
   const [isPassword, setIsPassword] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
-
-  const onHandleId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setId(e.target.value);
-  }, []);
-
-  const onHandlePassword = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.target.value);
-    },
-    []
-  );
 
   useEffect(() => {
     checkAvailable(id, password, setIsId, setIsPassword);
