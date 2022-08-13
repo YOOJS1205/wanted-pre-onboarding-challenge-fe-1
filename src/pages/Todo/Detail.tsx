@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
-import axios from "axios";
 import styled from "styled-components";
+import { customToDoAxios } from "../../util/customToDoAxios";
 import { IPostData } from "./Todo";
 import Button from "../../components/Button/Button";
 
@@ -11,13 +11,8 @@ interface IProps {
 
 export default function Detail({ postData, postKey }: IProps) {
   const onClickDeleteButton = useCallback(async () => {
-    const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:8080/todos/${postKey}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await customToDoAxios.delete(`/todos/${postKey}`);
     } catch (error) {
       console.log(error);
     }
