@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { customToDoAxios } from "../../api/customToDoAxios";
 import styled from "styled-components";
 import Button from "../Button/Button";
@@ -14,6 +15,8 @@ interface IContainer {
 }
 
 export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
+  const queryClient = useQueryClient();
+
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
@@ -25,15 +28,25 @@ export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
     setText(e.target.value);
   }, []);
 
-  const onClickAddButton = useCallback(async () => {
+  const addTodo = useCallback(async (data: any) => {
     try {
-      await customToDoAxios.post("/", {
-        title: title,
-        content: text,
-      });
-      setModalOpen(false);
-    } catch (error) {}
-  }, [title, text, setModalOpen]);
+      return await customToDoAxios.post("/", data);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }, []);
+
+  const { mutate: add } = useMutation(addTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  const onClickAddButton = useCallback(() => {
+    add({ title: title, content: text });
+    setModalOpen(false);
+  }, [add, title, text, setModalOpen]);
 
   return (
     <Container modalOpen={modalOpen} onClick={onClick}>
