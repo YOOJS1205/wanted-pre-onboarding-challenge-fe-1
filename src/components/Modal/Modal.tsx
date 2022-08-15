@@ -39,6 +39,7 @@ export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
 
   const { mutate: add } = useMutation(addTodo, {
     onSuccess: () => {
+      // update 후에 get 함수를 재실행시켜줌 (새로고침 안 해도 됨)
       queryClient.invalidateQueries(["todos"]);
     },
   });
