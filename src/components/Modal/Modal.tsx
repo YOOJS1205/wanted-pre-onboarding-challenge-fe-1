@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { customToDoAxios } from "../../api/customToDoAxios";
+import { createTodo } from "../../api/todo";
 import styled from "styled-components";
 import Button from "../Button/Button";
 
@@ -28,16 +28,7 @@ export default function Modal({ modalOpen, onClick, setModalOpen }: IProps) {
     setText(e.target.value);
   }, []);
 
-  const addTodo = useCallback(async (data: any) => {
-    try {
-      return await customToDoAxios.post("/", data);
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-  }, []);
-
-  const { mutate: add } = useMutation(addTodo, {
+  const { mutate: add } = useMutation(createTodo, {
     onSuccess: () => {
       // update 후에 get 함수를 재실행시켜줌 (새로고침 안 해도 됨)
       queryClient.invalidateQueries(["todos"]);

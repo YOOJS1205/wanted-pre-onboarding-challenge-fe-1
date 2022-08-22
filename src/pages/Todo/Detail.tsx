@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
-import { customToDoAxios } from "../../api/customToDoAxios";
+import { deleteTodo } from "../../api/todo";
 import { IPostData } from "./Todo";
 import Button from "../../components/Button/Button";
 
@@ -13,14 +13,6 @@ interface IProps {
 export default function Detail({ postData, postKey }: IProps) {
   const queryClient = useQueryClient();
 
-  const deleteTodo = useCallback(async () => {
-    try {
-      return await customToDoAxios.delete(`/${postKey}`);
-    } catch (error) {
-      return error;
-    }
-  }, [postKey]);
-
   const { mutate: deleteTodolist } = useMutation(deleteTodo, {
     onSuccess: () => {
       queryClient.invalidateQueries(["todos"]);
@@ -28,8 +20,8 @@ export default function Detail({ postData, postKey }: IProps) {
   });
 
   const onClickDeleteButton = useCallback(() => {
-    deleteTodolist();
-  }, [deleteTodolist]);
+    deleteTodolist(postKey);
+  }, [deleteTodolist, postKey]);
 
   return (
     <Container>

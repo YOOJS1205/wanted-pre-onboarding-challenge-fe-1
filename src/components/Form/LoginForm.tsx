@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { customAuthAxios } from "../../api/customAuthAxios";
+import { authAPI } from "../../api/api";
 import { checkAvailable } from "../../util/check";
 import { checkActive } from "../../util/check";
 import useInput from "../../hooks/useInput";
@@ -30,7 +30,7 @@ export default function LoginForm() {
 
   const onClickLoginButton = useCallback(async () => {
     try {
-      const res = await customAuthAxios.post("/login", {
+      const res = await authAPI.post("/login", {
         email: id,
         password: password,
       });
