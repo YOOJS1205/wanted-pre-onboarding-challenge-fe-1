@@ -1,12 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { authAPI } from "../../api/api";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
-import ToJoin from "../../pages/Login/ToJoin";
 import { FormLabel, FormText } from "./FormElement";
+
 interface UserForm {
   id: string;
   password: string;
@@ -14,8 +14,6 @@ interface UserForm {
 
 export default function LoginHookForm() {
   const navigate = useNavigate();
-  // 아이디 비밀번호 일치 여부
-  const [isWrong, setIsWrong] = useState(false);
   // react-hook-form
   const {
     register,
@@ -26,20 +24,13 @@ export default function LoginHookForm() {
   const onSuccess = useCallback(
     async (data: { id: string; password: string }) => {
       try {
-        const res = await authAPI.post("/login", {
+        await authAPI.post("/create", {
           email: data.id,
           password: data.password,
         });
-
-        if (res.data.message === "성공적으로 로그인 했습니다") {
-          localStorage.setItem("token", res.data.token);
-          navigate("/todo");
-        }
+        navigate("/auth/login");
       } catch (error) {
         console.log(error);
-        if (error.response.data.details === "로그인에 실패했습니다") {
-          setIsWrong((prev) => !prev);
-        }
       }
     },
     [navigate]
@@ -68,17 +59,13 @@ export default function LoginHookForm() {
             },
           })}
         />
-        <FormText>
-          {errors?.password?.message ||
-            (isWrong && "아이디와 비밀번호가 일치하지 않습니다.")}
-        </FormText>
+        <FormText>{errors?.password?.message}</FormText>
         <Button
-          buttonText="로그인"
+          buttonText="회원가입"
           onClick={null}
           isActive={true}
           size={null}
         />
-        <ToJoin />
       </Container>
     </form>
   );

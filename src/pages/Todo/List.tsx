@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { readTodo } from "../../api/todo";
+import useGetTodos from "../../hooks/useGetTodos";
 import styled from "styled-components";
 
 interface IProps {
@@ -12,12 +11,7 @@ export default function List({ getPost, getPostKey }: IProps) {
   const [postData, setPostData] = useState({ title: "", content: "" });
   const [postKey, setPostKey] = useState("");
 
-  // 두번째 인자로 들어가는 queryFunc 은 반드시 promise를 반환해야한다.
-  const { data } = useQuery(["todos"], readTodo, {
-    // 다시 브라우저로 돌아왔을 때 함수 재실행 여부
-    refetchOnWindowFocus: false,
-    retry: 0,
-  });
+  const todos = useGetTodos();
 
   useEffect(() => {
     getPostKey(postKey);
@@ -39,8 +33,8 @@ export default function List({ getPost, getPostKey }: IProps) {
   return (
     <Container onClick={getPostData}>
       <p className="ir">할일 목록입니다.</p>
-      {data &&
-        data.map((item: any) => (
+      {todos &&
+        todos.map((item: any) => (
           <Item key={item.id} onClick={() => setPostKey(item.id)}>
             <Title>{item.title}</Title>
             <Content>{item.content}</Content>
