@@ -1,6 +1,7 @@
 import axios from "axios";
+import { getCookieToken } from "../util/cookie";
 
-const token = localStorage.getItem("token");
+const token = getCookieToken();
 
 // 로그인, 회원가입 API
 export const authAPI = axios.create({

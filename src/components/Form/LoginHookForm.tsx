@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { setCookieToken } from "../../util/cookie";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { authAPI } from "../../api/api";
@@ -32,7 +33,7 @@ export default function LoginHookForm() {
         });
 
         if (res.data.message === "성공적으로 로그인 했습니다") {
-          localStorage.setItem("token", res.data.token);
+          setCookieToken(res.data.token);
           navigate("/todo");
         }
       } catch (error) {
